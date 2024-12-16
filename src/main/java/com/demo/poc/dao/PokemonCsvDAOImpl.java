@@ -28,7 +28,7 @@ public class PokemonCsvDAOImpl implements PokemonDAO {
                         pokemonList.add(pokemon);
                     });
         } catch (Exception exception) {
-            throw new IllegalArgumentException("Error reading CSV", exception);
+            throw new RuntimeException("Error reading CSV", exception);
         }
         return pokemonList;
     }
@@ -41,7 +41,7 @@ public class PokemonCsvDAOImpl implements PokemonDAO {
                 return pokemon;
             }
         }
-        throw new IllegalArgumentException("No such pokemon");
+        throw new IllegalArgumentException("No such element with code " + code);
     }
 
     @Override

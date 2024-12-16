@@ -25,7 +25,7 @@ public class PokemonMemoryDAOImpl implements PokemonDAO {
             if(pokemon.getCode() == code)
                 return pokemon;
         }
-        return null;
+        throw new IllegalArgumentException("No such element with code " + code);
     }
 
     @Override
