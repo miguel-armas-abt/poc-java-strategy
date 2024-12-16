@@ -4,10 +4,12 @@ import com.demo.poc.commons.CsvReader;
 import com.demo.poc.dto.PokemonDTO;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class PokemonCsvDAOImpl implements PokemonDAO {
 
-    private final String FILE = "/pokemones/pokemons.csv";
+    private static final String FILE = "/pokemones/pokemons.csv";
     private static final char SEPARATOR = ',';
 
     @Override
@@ -44,6 +46,6 @@ public class PokemonCsvDAOImpl implements PokemonDAO {
 
     @Override
     public boolean supports(Class<?> selectedCass) {
-        return selectedCass.isAssignableFrom(PokemonCsvDAOImpl.class);
+        return PokemonCsvDAOImpl.class.isAssignableFrom(selectedCass);
     }
 }

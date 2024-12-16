@@ -1,23 +1,19 @@
 package com.demo.poc.repository;
 
 import com.demo.poc.commons.PropertiesReader;
-import com.demo.poc.dao.PokemonCsvDAOImpl;
 import com.demo.poc.dao.PokemonDAO;
-import com.demo.poc.dao.PokemonMemoryDAOImpl;
 import com.demo.poc.dto.PokemonDTO;
-import java.util.ArrayList;
+import com.google.inject.Inject;
 import java.util.List;
+import java.util.Set;
 
 public class PokemonRepository {
 
-    private final List<PokemonDAO> pokemonDAOList;
+    private final Set<PokemonDAO> pokemonDAOSet;
 
-    public PokemonRepository() {
-        this.pokemonDAOList = new ArrayList<>();
-        PokemonCsvDAOImpl csvDAO = new PokemonCsvDAOImpl();
-        PokemonMemoryDAOImpl memoryDAO = new PokemonMemoryDAOImpl();
-        pokemonDAOList.add(csvDAO);
-        pokemonDAOList.add(memoryDAO);
+    @Inject
+    public PokemonRepository(Set<PokemonDAO> pokemonDAOSet) {
+        this.pokemonDAOSet = pokemonDAOSet;
     }
 
     public List<PokemonDTO> findAll() {
@@ -30,7 +26,7 @@ public class PokemonRepository {
 
     private PokemonDAO selectDAO() {
         Class<?> selectedClass = PropertiesReader.getPropertyClass("pokemones.dao.selector-class");
-        for(PokemonDAO dao: this.pokemonDAOList) {
+        for(PokemonDAO dao: this.pokemonDAOSet) {
             if(dao.supports(selectedClass))
                 return dao;
         }

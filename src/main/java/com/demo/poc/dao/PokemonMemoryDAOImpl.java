@@ -3,7 +3,9 @@ package com.demo.poc.dao;
 import com.demo.poc.dto.PokemonDTO;
 import java.util.Arrays;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class PokemonMemoryDAOImpl implements PokemonDAO {
 
     private final List<PokemonDTO> pokemones = Arrays.asList(
@@ -28,6 +30,6 @@ public class PokemonMemoryDAOImpl implements PokemonDAO {
 
     @Override
     public boolean supports(Class<?> selectedCass) {
-        return selectedCass.isAssignableFrom(PokemonMemoryDAOImpl.class);
+        return PokemonMemoryDAOImpl.class.isAssignableFrom(selectedCass);
     }
 }
