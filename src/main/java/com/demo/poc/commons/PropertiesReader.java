@@ -27,7 +27,7 @@ public class PropertiesReader {
         String className = getProperty(property);
         try {
             return Class.forName(className);
-        } catch (Exception exception) {
+        } catch (ClassNotFoundException exception) {
             throw new IllegalArgumentException("No such selector class: " + exception.getMessage(), exception);
         }
     }
